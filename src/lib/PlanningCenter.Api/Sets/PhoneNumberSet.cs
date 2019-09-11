@@ -1,6 +1,7 @@
 ﻿using PlanningCenter.Api.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PlanningCenter.Api.Models.Internal;
 
 namespace PlanningCenter.Api.Sets {
     public class PhoneNumberSet : BaseSet<PhoneNumber> {
@@ -17,11 +18,11 @@ namespace PlanningCenter.Api.Sets {
         }
 
         public async Task<IPlanningCenterRestResponse<PhoneNumber>> CreateAsync(PhoneNumber entity, int personId) {
-            return await base.PostAsync(entity, $"/people/v2/people/{personId}/phone_numbers");
+            return await base.PostAsync<InternalPhoneNumber, PhoneNumber>(new InternalPhoneNumber(entity), $"/people/v2/people/{personId}/phone_numbers");
         }
 
         public async Task<IPlanningCenterRestResponse<PhoneNumber>> UpdateAsync(PhoneNumber entity, int personId) {
-            return await base.PatchAsync(entity, $"/people/v2/people/{personId}/phone_numbers/{entity.Id}");
+            return await base.PatchAsync<InternalPhoneNumber, PhoneNumber>(new InternalPhoneNumber(entity), $"/people/v2/people/{personId}/phone_numbers/{entity.Id}");
         }
 
         public async Task<IPlanningCenterRestResponse> DeleteAsync(int phoneNumberId, int personId) {

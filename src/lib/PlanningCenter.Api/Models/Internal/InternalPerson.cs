@@ -3,13 +3,36 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace PlanningCenter.Api.Models {
-    public class Person : BaseModel {
-        public Person() {
-            Emails = new List<Email>();
-            PhoneNumbers = new List<PhoneNumber>();
-            Addresses = new List<Address>();
+namespace PlanningCenter.Api.Models.Internal {
+    internal class InternalPerson : BaseModel {
+        public InternalPerson() {
             Type = "Person";
+        }
+
+        public InternalPerson(Person person) : this() {
+            Id = person.Id;
+            AccountingAdministrator = person.AccountingAdministrator;
+            Anniversary = person.Anniversary;
+            BirthDate = person.BirthDate;
+            Child = person.Child;
+            GivenName = person.GivenName;
+            FirstName = person.FirstName;
+            Avatar = person.Avatar;
+            Grade = person.Grade;
+            GraduationYear = person.GraduationYear;
+            Gender = person.Gender;
+            InactivatedAt = person.InactivatedAt;
+            LastName = person.LastName;
+            MedicalNotes = person.MedicalNotes;
+            Membership = person.Membership;
+            MiddleName = person.MiddleName;
+            NickName = person.NickName;
+            SiteAdministrator = person.SiteAdministrator;
+            Status = person.Status;
+            Campus = person.Campus;
+            RemoteID = person.RemoteID;
+            PeoplePermissions = person.PeoplePermissions;
+            SchoolType = person.SchoolType;
         }
 
         [JsonProperty("accounting_administrator")]
@@ -23,9 +46,6 @@ namespace PlanningCenter.Api.Models {
 
         [JsonProperty("child")]
         public bool Child { get; set; }
-
-        [JsonProperty("created_at")]
-        public DateTime CreatedAt { get; set; }
 
         [JsonProperty("given_name")]
         public string GivenName { get; set; }
@@ -60,15 +80,8 @@ namespace PlanningCenter.Api.Models {
         [JsonProperty("middle_name")]
         public string MiddleName { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
         [JsonProperty("nickname")]
         public string NickName { get; set; }
-
-        [JsonProperty("passed_background_check")]
-        [JsonIgnore]
-        public bool PassedBackgroundCheck { get; set; }
 
         [JsonProperty("people_permissions")]
         public string PeoplePermissions { get; set; }
@@ -85,24 +98,7 @@ namespace PlanningCenter.Api.Models {
         [JsonProperty("status")]
         public string Status { get; set; }
 
-        [JsonProperty("updated_at")]
-        [JsonIgnore]
-        public DateTime? UpdatedAt { get; set; }
-
-        [JsonProperty("demographic_avatar_url")]
-        public string DemographicAvatarUrl { get; set; }
-
         [JsonProperty("primary_campus")]
-        [JsonIgnore]
         public Relationship<Campus> Campus { get; set; }
-
-        [JsonProperty("emails")]
-        public List<Email> Emails { get; set; }
-
-        [JsonProperty("phone_numbers")]
-        public List<PhoneNumber> PhoneNumbers { get; set; }
-
-        [JsonProperty("addresses")]
-        public List<Address> Addresses { get; set; }
     }
 }

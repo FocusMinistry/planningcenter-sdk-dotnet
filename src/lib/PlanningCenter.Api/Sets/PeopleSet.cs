@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PlanningCenter.Api.Models;
 using PlanningCenter.Api.QueryObjects;
+using PlanningCenter.Api.Models.Internal;
 
 namespace PlanningCenter.Api.Sets {
     public class PeopleSet : BaseSet<Person> {
@@ -24,7 +25,7 @@ namespace PlanningCenter.Api.Sets {
         /// Get all the people in PCO
         /// </summary>
         /// <returns>A collection of people</returns>
-        public async Task<IPlanningCenterRestResponse<List<Person>>> FindAsync(string searchTerm) {
+        public async Task<IPlanningCenterRestResponse<List<Person>>> SearchAsync(string searchTerm) {
             return await base.FindAsync($"/people/v2/people?where[search_name_or_email_or_phone_number]={searchTerm}&include=addresses,emails,phone_numbers,field_data");
         }
 
@@ -49,12 +50,16 @@ namespace PlanningCenter.Api.Sets {
         /// </summary>
         /// <param name="personID">The person id</param>
         /// <returns>A person from PCO</returns>
-        public async new Task<IPlanningCenterRestResponse<List<Person>>> GetAsync(string personID) {
-            return await base.FindAsync($"/people/v2/people/{personID}?include=addresses,emails,phone_numbers,field_data");
+        public async new Task<IPlanningCenterRestResponse<Person>> GetAsync(string personID) {
+            return await base.GetAsync($"/people/v2/people/{personID}?include=addresses,emails,phone_numbers,field_data");
         }
 
         public async Task<IPlanningCenterRestResponse<Person>> CreateAsync(Person entity) {
-            return await base.PostAsync(entity, "/people/v2/people");
+            return await base.PostAsync<InternalPerson, Person>(new InternalPerson(entity), "/people/v2/people");
+        }
+
+        public async Task<IPlanningCenterRestResponse<Person>> UpdateAsync(Person entity) {
+            return await base.PatchAsync<InternalPerson, Person>(new InternalPerson(entity), $"/people/v2/people/{entity.Id}");
         }
     }
 }

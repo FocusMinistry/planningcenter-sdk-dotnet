@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 
 namespace PlanningCenter.Api.Models {
-    public class Address {
-        public string Type { get; set; } = "Address";
-
-        public int Id { get; set; }
+    public class Address : BaseModel {
+        public Address() {
+            Type = "Address";
+        }
 
         public string City { get; set; }
 

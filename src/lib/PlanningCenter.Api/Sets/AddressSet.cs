@@ -1,6 +1,7 @@
 ﻿using PlanningCenter.Api.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PlanningCenter.Api.Models.Internal;
 
 namespace PlanningCenter.Api.Sets {
     public class AddressSet : BaseSet<Address> {
@@ -17,11 +18,11 @@ namespace PlanningCenter.Api.Sets {
         }
 
         public async Task<IPlanningCenterRestResponse<Address>> CreateAsync(Address entity, int personId) {
-            return await base.PostAsync(entity, $"/people/v2/people/{personId}/addresses");
+            return await base.PostAsync<InternalAddress, Address>(new InternalAddress(entity), $"/people/v2/people/{personId}/addresses");
         }
 
         public async Task<IPlanningCenterRestResponse<Address>> UpdateAsync(Address entity) {
-            return await base.PostAsync(entity, $"/people/v2/addresses/{entity.Id}");
+            return await base.PostAsync<InternalAddress, Address>(new InternalAddress(entity), $"/people/v2/addresses/{entity.Id}");
         }
     }
 }

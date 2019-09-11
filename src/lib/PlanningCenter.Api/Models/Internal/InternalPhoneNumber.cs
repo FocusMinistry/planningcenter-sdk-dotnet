@@ -3,10 +3,19 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace PlanningCenter.Api.Models {
-    public class PhoneNumber : BaseModel {
-        public PhoneNumber() {
+
+namespace PlanningCenter.Api.Models.Internal {
+    internal class InternalPhoneNumber : BaseModel {
+        public InternalPhoneNumber() {
             Type = "PhoneNumber";
+        }
+
+        public InternalPhoneNumber(PhoneNumber phoneNumber) : this() {
+            Id = phoneNumber.Id;
+            Number = phoneNumber.Number;
+            Carrier = phoneNumber.Carrier;
+            Location = phoneNumber.Location;
+            Primary = phoneNumber.Primary;
         }
 
         [JsonProperty("number")]
@@ -20,11 +29,5 @@ namespace PlanningCenter.Api.Models {
 
         [JsonProperty("primary")]
         public bool Primary { get; set; }
-
-        [JsonProperty("created_at")]
-        public DateTime CreatedAt { get; set; }
-
-        [JsonProperty("updated_at")]
-        public DateTime UpdatedAt { get; set; }
     }
 }

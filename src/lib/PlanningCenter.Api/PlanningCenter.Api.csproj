@@ -55,9 +55,17 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Includes\PersonIncludes.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\FieldDefinition.cs" />
     <Compile Include="Models\Household.cs" />
+    <Compile Include="Models\Internal\InternalAddress.cs" />
+    <Compile Include="Models\Internal\InternalEmail.cs" />
+    <Compile Include="Models\Internal\InternalHousehold.cs" />
+    <Compile Include="Models\Internal\InternalPerson.cs" />
+    <Compile Include="Models\Internal\InternalPhoneNumber.cs" />
+    <Compile Include="Models\Lookup.cs" />
     <Compile Include="Models\MaritalStatus.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PhoneNumber.cs" />
@@ -71,6 +79,7 @@
     <Compile Include="Sets\BaseSet.cs" />
     <Compile Include="Sets\CampusSet.cs" />
     <Compile Include="Sets\EmailSet.cs" />
+    <Compile Include="Sets\FieldDefinitionSet.cs" />
     <Compile Include="Sets\HouseholdSet.cs" />
     <Compile Include="Sets\MaritalStatusSet.cs" />
     <Compile Include="Sets\PeopleSet.cs" />

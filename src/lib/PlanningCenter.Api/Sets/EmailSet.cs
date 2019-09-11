@@ -1,6 +1,7 @@
 ﻿using PlanningCenter.Api.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PlanningCenter.Api.Models.Internal;
 
 namespace PlanningCenter.Api.Sets {
     public class EmailSet : BaseSet<Email> {
@@ -17,11 +18,11 @@ namespace PlanningCenter.Api.Sets {
         }
 
         public async Task<IPlanningCenterRestResponse<Email>> CreateAsync(Email entity, int personId) {
-            return await base.PostAsync(entity, $"/people/v2/people/{personId}/emails");
+            return await base.PostAsync<InternalEmail, Email>(new InternalEmail(entity), $"/people/v2/people/{personId}/emails");
         }
 
         public async Task<IPlanningCenterRestResponse<Email>> UpdateAsync(Email entity) {
-            return await base.PatchAsync(entity, $"/people/v2/emails/{entity.Id}");
+            return await base.PatchAsync<InternalEmail, Email>(new InternalEmail(entity), $"/people/v2/emails/{entity.Id}");
         }
 
         public async Task<IPlanningCenterRestResponse> DeleteAsync(int emailId) {

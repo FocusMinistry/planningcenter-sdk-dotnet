@@ -3,26 +3,26 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace PlanningCenter.Api.Models {
-    public class Household : BaseModel {
-        public Household() {
+namespace PlanningCenter.Api.Models.Internal {
+    internal class InternalHousehold : BaseModel {
+        public InternalHousehold() {
             People = new Relationship<List<Lookup>>();
             Type = "Household";
+        }
+
+        public InternalHousehold(Household household) : this() {
+            Id = household.Id;
+            Name = household.Name;
+            MemberCount = household.MemberCount;
+            PrimaryContactID = household.PrimaryContactID;
+            PrimaryContact = household.PrimaryContact;
+            People = household.People;
         }
 
         public string Name { get; set; }
 
         [JsonProperty("member_count")]
         public int MemberCount { get; set; }
-
-        [JsonProperty("primary_contact_name")]
-        public string PrimaryContactName { get; set; }
-
-        [JsonProperty("created_at")]
-        public DateTime CreatedAt { get; set; }
-
-        [JsonProperty("updated_at")]
-        public DateTime UpdatedAt { get; set; }
 
         [JsonProperty("primary_contact_id")]
         public int PrimaryContactID { get; set; }

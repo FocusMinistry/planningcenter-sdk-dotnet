@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PlanningCenter.Api.Models {
+    public class BaseModel {
+        public string Type { get; set; }
+
+        public int Id { get; set; }
+
+        public Lookup ToLookup() {
+            return new Lookup(Type, Id);
+        }
+    }
+}

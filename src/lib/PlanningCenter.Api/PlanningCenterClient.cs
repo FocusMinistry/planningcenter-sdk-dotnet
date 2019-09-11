@@ -15,6 +15,10 @@ namespace PlanningCenter.Api {
             MaritalStatuses = new MaritalStatusSet(options, token);
             Households = new HouseholdSet(options, token);
             Emails = new EmailSet(options, token);
+            FieldDefinitions = new FieldDefinitionSet(options, token);
+            PhoneNumbers = new PhoneNumberSet(options, token);
+            Addresses = new AddressSet(options, token);
+            Campuses = new CampusSet(options, token);
         }
 
         public PeopleSet People { get; }
@@ -25,9 +29,13 @@ namespace PlanningCenter.Api {
 
         public EmailSet Emails { get; }
 
+        public PhoneNumberSet PhoneNumbers { get; }
+
         public AddressSet Addresses { get; }
 
         public CampusSet Campuses { get; }
+
+        public FieldDefinitionSet FieldDefinitions { get; set; }
 
         /// <summary>
         /// Gets the url that should be sent via browser to authorize the planning center user and get consent
@@ -86,6 +94,8 @@ namespace PlanningCenter.Api {
                 {
                     new KeyValuePair<string, string>("grant_type", "refresh_token"),
                     new KeyValuePair<string, string>("refresh_token", refreshToken),
+                    new KeyValuePair<string, string>("client_id", options.ClientID),
+                    new KeyValuePair<string, string>("client_secret", options.ClientSecret),
                 });
 
                 return await GetToken(options.ApiUrl, content);

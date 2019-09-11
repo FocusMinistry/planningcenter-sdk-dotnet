@@ -40,29 +40,21 @@ namespace PlanningCenter.Api.Sets {
             }
         }
 
-        internal async Task<IPlanningCenterRestResponse<T>> PostAsync(T entity, string url) {
-            return await PostAsync<T>(entity, url);
-        }
-
-        internal async Task<IPlanningCenterRestResponse<S>> PostAsync<S>(S entity, string url) where S : new() {
+        internal async Task<IPlanningCenterRestResponse<TOut>> PostAsync<TIn, TOut>(TIn entity, string url) where TOut : new() {
             using (var http = CreateClient()) {
                 var jsonContent = JsonConvert.SerializeObject(entity, new JsonApiSerializerSettings());
                 var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
                 var response = await http.PostAsync(url, content);
-                return await ConvertResponseAsync<S>(response);
+                return await ConvertResponseAsync<TOut>(response, jsonContent);
             }
         }
 
-        internal async Task<IPlanningCenterRestResponse<T>> PatchAsync(T entity, string url) {
-            return await PatchAsync<T>(entity, url);
-        }
-
-        internal async Task<IPlanningCenterRestResponse<S>> PatchAsync<S>(S entity, string url) where S : new() {
+        internal async Task<IPlanningCenterRestResponse<TOut>> PatchAsync<TIn, TOut>(TIn entity, string url) where TOut : new() {
             using (var http = CreateClient()) {
                 var jsonContent = JsonConvert.SerializeObject(entity, new JsonApiSerializerSettings());
                 var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json-patch+json");
                 var response = await http.PatchAsync(url, content);
-                return await ConvertResponseAsync<S>(response);
+                return await ConvertResponseAsync<TOut>(response, jsonContent);
             }
         }
 
@@ -82,10 +74,11 @@ namespace PlanningCenter.Api.Sets {
             return httpClient;
         }
 
-        private async Task<IPlanningCenterRestResponse<S>> ConvertResponseAsync<S>(HttpResponseMessage response) where S : new() {
+        private async Task<IPlanningCenterRestResponse<S>> ConvertResponseAsync<S>(HttpResponseMessage response, string request = "") where S : new() {
             var planningCenterResponse = new PlanningCenterRestResponse<S> {
                 StatusCode = response.StatusCode,
-                JsonResponse = await response.Content.ReadAsStringAsync()
+                JsonResponse = await response.Content.ReadAsStringAsync(),
+                RequestValue = request
             };
 
             if (!string.IsNullOrEmpty(planningCenterResponse.JsonResponse) && (int)response.StatusCode > 300) {
@@ -98,10 +91,11 @@ namespace PlanningCenter.Api.Sets {
             return planningCenterResponse;
         }
 
-        private async Task<IPlanningCenterRestResponse> ConvertResponseAsync(HttpResponseMessage response) {
+        private async Task<IPlanningCenterRestResponse> ConvertResponseAsync(HttpResponseMessage response, string request = "") {
             var planningCenterResponse = new PlanningCenterRestResponse {
                 StatusCode = response.StatusCode,
-                JsonResponse = await response.Content.ReadAsStringAsync()
+                JsonResponse = await response.Content.ReadAsStringAsync(),
+                RequestValue = request
             };
 
             if (!string.IsNullOrEmpty(planningCenterResponse.JsonResponse) && (int)response.StatusCode > 300) {
