@@ -104,5 +104,8 @@ namespace PlanningCenter.Api.Models {
 
         [JsonProperty("addresses")]
         public List<Address> Addresses { get; set; }
+
+        [JsonProperty("households")]
+        public List<Household> Households { get; set; }
     }
 }

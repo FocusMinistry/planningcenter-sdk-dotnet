@@ -6,6 +6,7 @@ using PlanningCenter.Api.Models;
 using PlanningCenter.Api.Extensions;
 using PlanningCenter.Api.Exceptions;
 using PlanningCenter.Api.Sets;
+using PlanningCenter.Api.Realms;
 
 namespace PlanningCenter.Api {
     public class PlanningCenterClient {
@@ -19,7 +20,10 @@ namespace PlanningCenter.Api {
             PhoneNumbers = new PhoneNumberSet(options, token);
             Addresses = new AddressSet(options, token);
             Campuses = new CampusSet(options, token);
+            Giving = new GivingRealm(options, token);
         }
+
+        public GivingRealm Giving { get; }
 
         public PeopleSet People { get; }
 

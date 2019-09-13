@@ -18,7 +18,7 @@ namespace PlanningCenter.Api.Sets {
         /// </summary>
         /// <returns>A collection of people</returns>
         public async Task<IPlanningCenterRestResponse<List<Person>>> FindAsync() {
-            return await base.FindAsync($"/people/v2/people?include=addresses,emails,phone_numbers,field_data");
+            return await base.FindAsync($"/people/v2/people?include=addresses,emails,phone_numbers,field_data,households");
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace PlanningCenter.Api.Sets {
         /// </summary>
         /// <returns>A collection of people</returns>
         public async Task<IPlanningCenterRestResponse<List<Person>>> SearchAsync(string searchTerm) {
-            return await base.FindAsync($"/people/v2/people?where[search_name_or_email_or_phone_number]={searchTerm}&include=addresses,emails,phone_numbers,field_data");
+            return await base.FindAsync($"/people/v2/people?where[search_name_or_email_or_phone_number]={searchTerm}&include=addresses,emails,phone_numbers,field_data,households");
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace PlanningCenter.Api.Sets {
         /// </summary>
         /// <returns>A collection of people</returns>
         public async Task<IPlanningCenterRestResponse<List<Person>>> FindByHouseholdAsync(int householdId) {
-            return await base.FindAsync($"/people/v2/households/{householdId}/people?include=addresses,emails,phone_numbers,field_data");
+            return await base.FindAsync($"/people/v2/households/{householdId}/people?include=addresses,emails,phone_numbers,field_data,households");
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace PlanningCenter.Api.Sets {
         /// </summary>
         /// <returns>A collection of people</returns>
         public async Task<IPlanningCenterRestResponse<Person>> MeAsync() {
-            return await base.GetAsync($"/people/v2/me?include=addresses,emails,phone_numbers,field_data");
+            return await base.GetAsync($"/people/v2/me?include=addresses,emails,phone_numbers,field_data,households");
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace PlanningCenter.Api.Sets {
         /// <param name="personID">The person id</param>
         /// <returns>A person from PCO</returns>
         public async new Task<IPlanningCenterRestResponse<Person>> GetAsync(string personID) {
-            return await base.GetAsync($"/people/v2/people/{personID}?include=addresses,emails,phone_numbers,field_data");
+            return await base.GetAsync($"/people/v2/people/{personID}?include=addresses,emails,phone_numbers,field_data,households");
         }
 
         public async Task<IPlanningCenterRestResponse<Person>> CreateAsync(Person entity) {
