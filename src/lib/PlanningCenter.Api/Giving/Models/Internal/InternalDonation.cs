@@ -8,10 +8,10 @@ using Newtonsoft.Json;
 using JsonApiSerializer.JsonApi;
 
 namespace PlanningCenter.Api.Giving.Models.Internal {
-    public class InternalDonation : BaseModel {
+    internal class InternalDonation : BaseModel {
         public InternalDonation() {
             Type = "Donation";
-            Designations = new List<Designation>();
+            Designations = new List<InternalDesignation>();
         }
 
         public InternalDonation(Donation donation) : this() {
@@ -25,8 +25,10 @@ namespace PlanningCenter.Api.Giving.Models.Internal {
             ReceivedAt = donation.ReceivedAt;
             Person = donation.Person;
             Person.Data.Type = "Person";
-            PaymentSource = new Relationship<InternalPaymentSource> { Data = new InternalPaymentSource(donation.PaymentSource.Data) };
-            Designations = donation.Designations;
+            PaymentSource = new Relationship<StringLookup> { Data = new StringLookup { Id = donation.PaymentSource.Data.Id, Type = "PaymentSource" } };
+            Batch = donation.Batch;
+
+            donation.Designations.ForEach(x => Designations.Add(new InternalDesignation(x)));
         }
 
         [JsonProperty("payment_method")]
@@ -59,10 +61,13 @@ namespace PlanningCenter.Api.Giving.Models.Internal {
         [JsonProperty("person")]
         public Relationship<Lookup> Person { get; set; }
 
+        [JsonProperty("batch")]
+        public Relationship<Lookup> Batch { get; set; }
+
         [JsonProperty("payment_source")]
-        public Relationship<InternalPaymentSource> PaymentSource { get; set; }
+        public Relationship<StringLookup> PaymentSource { get; set; }
 
         [JsonProperty("designations")]
-        public List<Designation> Designations { get; set; }
+        public List<InternalDesignation> Designations { get; set; }
     }
 }

@@ -53,11 +53,16 @@
     <Compile Include="Exceptions\BaseException.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Giving\Models\Batch.cs" />
+    <Compile Include="Giving\Models\BatchGroup.cs" />
     <Compile Include="Giving\Models\Designation.cs" />
     <Compile Include="Giving\Models\Donation.cs" />
+    <Compile Include="Giving\Models\Internal\InternalBatch.cs" />
+    <Compile Include="Giving\Models\Internal\InternalDesignation.cs" />
     <Compile Include="Giving\Models\Internal\InternalDonation.cs" />
     <Compile Include="Giving\Models\Internal\InternalPaymentSource.cs" />
     <Compile Include="Giving\Models\PaymentSource.cs" />
+    <Compile Include="Giving\Sets\BatchSet.cs" />
     <Compile Include="Giving\Sets\DonationSet.cs" />
     <Compile Include="Giving\Sets\PaymentSourceSet.cs" />
     <Compile Include="Includes\PersonIncludes.cs" />
@@ -79,6 +84,7 @@
     <Compile Include="Models\PhoneNumber.cs" />
     <Compile Include="Models\PlanningCenterRestResponse.cs" />
     <Compile Include="Models\PlanningCenterToken.cs" />
+    <Compile Include="Models\StringLookup.cs" />
     <Compile Include="PlanningCenterClient.cs" />
     <Compile Include="PlanningCenterOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,6 +7,7 @@ namespace PlanningCenter.Api.Realms {
             Funds = new FundSet(options, token);
             PaymentSources = new PaymentSourceSet(options, token);
             Donations = new DonationSet(options, token);
+            Batches = new BatchSet(options, token);
         }
 
         public FundSet Funds { get; }
@@ -14,5 +15,7 @@ namespace PlanningCenter.Api.Realms {
         public PaymentSourceSet PaymentSources { get; }
 
         public DonationSet Donations { get; }
+
+        public BatchSet Batches { get; set; }
     }
 }

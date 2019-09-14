@@ -80,6 +80,9 @@ namespace PlanningCenter.Api.Giving.Models {
         [JsonProperty("person")]
         public Relationship<Lookup> Person { get; set; }
 
+        [JsonProperty("batch")]
+        public Relationship<Lookup> Batch { get; set; }
+
         [JsonProperty("payment_source")]
         public Relationship<PaymentSource> PaymentSource { get; set; }
 
@@ -89,6 +92,12 @@ namespace PlanningCenter.Api.Giving.Models {
         public void SetPerson(Lookup person) {
             Person = new Relationship<Lookup> {
                 Data = person
+            };
+        }
+
+        public void SetBatch(Lookup batch) {
+            Batch = new Relationship<Lookup> {
+                Data = batch
             };
         }
 

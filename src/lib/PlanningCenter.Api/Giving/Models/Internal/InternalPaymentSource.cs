@@ -4,7 +4,7 @@ using System;
 using PlanningCenter.Api.Models;
 
 namespace PlanningCenter.Api.Giving.Models.Internal {
-    public class InternalPaymentSource {
+    internal class InternalPaymentSource {
         public InternalPaymentSource() { }
 
         public InternalPaymentSource(PaymentSource paymentSource) : this() {
