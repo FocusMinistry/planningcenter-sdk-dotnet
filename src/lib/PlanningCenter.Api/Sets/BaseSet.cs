@@ -40,9 +40,15 @@ namespace PlanningCenter.Api.Sets {
             }
         }
 
-        internal async Task<IPlanningCenterRestResponse<TOut>> PostAsync<TIn, TOut>(TIn entity, string url) where TOut : new() {
+        internal async Task<IPlanningCenterRestResponse<TOut>> PostAsync<TIn, TOut>(TIn entity, string url, JsonConverter converter = null) where TOut : new() {
             using (var http = CreateClient()) {
-                var jsonContent = JsonConvert.SerializeObject(entity, new JsonApiSerializerSettings());
+                var jsonContent = string.Empty;
+                if (converter != null) {
+                    jsonContent = JsonConvert.SerializeObject(entity, new JsonApiSerializerSettings(converter));
+                }
+                else {
+                    jsonContent = JsonConvert.SerializeObject(entity, new JsonApiSerializerSettings());
+                }
                 var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
                 var response = await http.PostAsync(url, content);
                 return await ConvertResponseAsync<TOut>(response, jsonContent);

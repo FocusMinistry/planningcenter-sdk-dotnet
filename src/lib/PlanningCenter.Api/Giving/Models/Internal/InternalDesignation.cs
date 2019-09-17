@@ -8,10 +8,12 @@ using Newtonsoft.Json;
 using JsonApiSerializer.JsonApi;
 
 namespace PlanningCenter.Api.Giving.Models.Internal {
-    public class InternalDesignation : BaseModel {
+    public class InternalDesignation {
         public InternalDesignation() {
             Type = "Designation";
         }
+
+        public string Type { get; set; }
 
         public InternalDesignation(Designation designation) : this() {
             AmountCents = designation.AmountCents;
@@ -32,14 +34,5 @@ namespace PlanningCenter.Api.Giving.Models.Internal {
 
         [JsonProperty("fund")]
         public Relationship<Lookup> Fund { get; set; }
-
-        public void SetFund(Fund fund) {
-            Fund = new Relationship<Lookup> {
-                Data = new Lookup {
-                    Id = fund.Id,
-                    Type = "Fund"
-                }
-            };
-        }
     }
 }

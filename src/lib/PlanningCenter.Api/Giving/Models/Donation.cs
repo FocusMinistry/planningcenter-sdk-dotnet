@@ -17,7 +17,7 @@ namespace PlanningCenter.Api.Giving.Models {
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty("created_at")]
+        [JsonProperty("updated_at")]
         public DateTime UpdatedAt { get; set; }
 
         /// <summary>

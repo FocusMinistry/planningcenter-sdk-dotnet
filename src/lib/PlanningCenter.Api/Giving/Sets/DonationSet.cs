@@ -4,6 +4,11 @@ using System.Threading.Tasks;
 using PlanningCenter.Api.Sets;
 using PlanningCenter.Api.Models;
 using PlanningCenter.Api.Giving.Models.Internal;
+using PlanningCenter.Api.Models;
+using Newtonsoft.Json;
+using JsonApiSerializer.JsonApi;
+using Newtonsoft.Json.Linq;
+using JsonApiSerializer;
 
 namespace PlanningCenter.Api.Giving.Sets {
     public class DonationSet : BaseSet<Donation> {
@@ -16,15 +21,38 @@ namespace PlanningCenter.Api.Giving.Sets {
         /// </summary>
         /// <returns>A collection of donations</returns>
         public async Task<IPlanningCenterRestResponse<List<Donation>>> FindAsync() {
-            return await base.FindAsync($"/giving/v2/donations");
+            return await base.FindAsync($"/giving/v2/donations?include=designations");
         }
 
         /// <summary>
         /// Create a donation in PCO
         /// </summary>
         /// <returns>The newly created donation</returns>
-        public async Task<IPlanningCenterRestResponse<Donation>> CreateAsync(Donation entity) {
-            return await base.PostAsync<InternalDonation, Donation>(new InternalDonation(entity), $"/giving/v2/donations");
+        public async Task<IPlanningCenterRestResponse<Donation>> CreateAsync(Donation entity, int batchID) {
+            var root = new DocumentRoot<InternalDonation> {
+                Data = new InternalDonation(entity),
+                Included = new List<JObject>()
+            };
+
+            entity.Designations.ForEach(x => {
+                root.Included.Add(JObject.FromObject(new {
+                    type = x.Type,
+                    attributes = new {
+                        amount_cents = x.AmountCents
+                    },
+                    relationships = new {
+                        fund = new {
+                            data = new {
+                                type = "Fund",
+                                id = x.Fund.Data.Id
+                            }
+                        }
+                    }
+                }));
+            });
+
+
+            return await base.PostAsync<DocumentRoot<InternalDonation>, Donation>(root, $"/giving/v2/batches/{batchID}/donations");
         }
     }
 }

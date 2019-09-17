@@ -11,7 +11,6 @@ namespace PlanningCenter.Api.Giving.Models.Internal {
     internal class InternalDonation : BaseModel {
         public InternalDonation() {
             Type = "Donation";
-            Designations = new List<InternalDesignation>();
         }
 
         public InternalDonation(Donation donation) : this() {
@@ -26,9 +25,6 @@ namespace PlanningCenter.Api.Giving.Models.Internal {
             Person = donation.Person;
             Person.Data.Type = "Person";
             PaymentSource = new Relationship<StringLookup> { Data = new StringLookup { Id = donation.PaymentSource.Data.Id, Type = "PaymentSource" } };
-            Batch = donation.Batch;
-
-            donation.Designations.ForEach(x => Designations.Add(new InternalDesignation(x)));
         }
 
         [JsonProperty("payment_method")]
@@ -61,13 +57,7 @@ namespace PlanningCenter.Api.Giving.Models.Internal {
         [JsonProperty("person")]
         public Relationship<Lookup> Person { get; set; }
 
-        [JsonProperty("batch")]
-        public Relationship<Lookup> Batch { get; set; }
-
         [JsonProperty("payment_source")]
         public Relationship<StringLookup> PaymentSource { get; set; }
-
-        [JsonProperty("designations")]
-        public List<InternalDesignation> Designations { get; set; }
     }
 }
