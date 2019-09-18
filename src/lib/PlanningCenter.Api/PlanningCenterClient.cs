@@ -91,7 +91,7 @@ namespace PlanningCenter.Api {
         /// <param name="options">The Planning Center Options for Client ID and Secret</param>
         /// <param name="refreshToken">The refresh token that was received from an access token call</param>
         /// <returns>A PCO Access Token</returns>
-        public static async Task<IPlanningCenterRestResponse<PlanningCenterToken>> RefreshAccessTokenAsync(PlanningCenterOptions options, string refreshToken) {
+        public static async Task<IPlanningCenterRestResponse<PlanningCenterToken>> RefreshAccessTokenAsync(PlanningCenterOptions options, string refreshToken, string scope) {
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             try {
                 var content = new FormUrlEncodedContent(new[]
@@ -100,6 +100,7 @@ namespace PlanningCenter.Api {
                     new KeyValuePair<string, string>("refresh_token", refreshToken),
                     new KeyValuePair<string, string>("client_id", options.ClientID),
                     new KeyValuePair<string, string>("client_secret", options.ClientSecret),
+                    new KeyValuePair<string, string>("scope", scope)
                 });
 
                 return await GetToken(options.ApiUrl, content);
