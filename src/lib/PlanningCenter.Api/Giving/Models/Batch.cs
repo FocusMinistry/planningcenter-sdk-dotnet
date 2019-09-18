@@ -20,6 +20,9 @@ namespace PlanningCenter.Api.Giving.Models {
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("committed_at")]
+        public DateTime? CommittedAt { get; set; }
+
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
 
