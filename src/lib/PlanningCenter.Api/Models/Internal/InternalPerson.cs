@@ -11,7 +11,6 @@ namespace PlanningCenter.Api.Models.Internal {
 
         public InternalPerson(Person person) : this() {
             Id = person.Id;
-            AccountingAdministrator = person.AccountingAdministrator;
             Anniversary = person.Anniversary;
             BirthDate = person.BirthDate;
             Child = person.Child;
@@ -27,16 +26,12 @@ namespace PlanningCenter.Api.Models.Internal {
             Membership = person.Membership;
             MiddleName = person.MiddleName;
             NickName = person.NickName;
-            SiteAdministrator = person.SiteAdministrator;
             Status = person.Status;
             Campus = person.Campus;
             RemoteID = person.RemoteID;
             PeoplePermissions = person.PeoplePermissions;
             SchoolType = person.SchoolType;
         }
-
-        [JsonProperty("accounting_administrator")]
-        public bool AccountingAdministrator { get; set; }
 
         [JsonProperty("anniversary")]
         public DateTime? Anniversary { get; set; }
@@ -91,9 +86,6 @@ namespace PlanningCenter.Api.Models.Internal {
 
         [JsonProperty("school_type")]
         public string SchoolType { get; set; }
-
-        [JsonProperty("site_administrator")]
-        public bool SiteAdministrator { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }
