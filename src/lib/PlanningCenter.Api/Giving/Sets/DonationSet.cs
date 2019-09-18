@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using JsonApiSerializer.JsonApi;
 using Newtonsoft.Json.Linq;
 using JsonApiSerializer;
+using System;
 
 namespace PlanningCenter.Api.Giving.Sets {
     public class DonationSet : BaseSet<Donation> {
@@ -22,6 +23,21 @@ namespace PlanningCenter.Api.Giving.Sets {
         /// <returns>A collection of donations</returns>
         public async Task<IPlanningCenterRestResponse<List<Donation>>> FindAsync() {
             return await base.FindAsync($"/giving/v2/donations?include=designations");
+        }
+
+        /// <summary>
+        /// Refund a donation
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IPlanningCenterRestResponse<Refund>> RefundAsync(int donationID, DateTime refundedDate) {
+            var json = JObject.FromObject(new {
+                data = new {
+                    attributes = new {
+                        refunded_at = refundedDate.ToString("yyyy-MM-dd")
+                    }
+                }
+            });
+            return await base.PostAsync<Refund>($"/giving/v2/donations/{donationID}/issue_refund", JsonConvert.SerializeObject(json));
         }
 
         /// <summary>

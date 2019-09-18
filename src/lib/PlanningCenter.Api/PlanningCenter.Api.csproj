@@ -62,6 +62,7 @@
     <Compile Include="Giving\Models\Internal\InternalDonation.cs" />
     <Compile Include="Giving\Models\Internal\InternalPaymentSource.cs" />
     <Compile Include="Giving\Models\PaymentSource.cs" />
+    <Compile Include="Giving\Models\Refund.cs" />
     <Compile Include="Giving\Sets\BatchSet.cs" />
     <Compile Include="Giving\Sets\DonationSet.cs" />
     <Compile Include="Giving\Sets\PaymentSourceSet.cs" />
