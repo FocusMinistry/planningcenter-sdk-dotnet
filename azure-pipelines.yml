@@ -26,7 +26,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
-    packagesToPack: 'src/lib/PlanningCenter/PlanningCenter.csproj'
+    packagesToPack: '**/PlanningCenter.csproj'
     versioningScheme: 'byBuildNumber'
 
 - task: NuGetCommand@2
