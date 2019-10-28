@@ -78,7 +78,7 @@ namespace PlanningCenter.Api {
                     new KeyValuePair<string, string>("redirect_uri", redirectUrl),
                 });
 
-                return await GetToken(options.ApiUrl, content);
+                return await GetTokenAsync(options.ApiUrl, content);
             }
             catch (Exception e) {
                 throw new ApiAccessException("Error Getting Auth Token", e);
@@ -103,14 +103,14 @@ namespace PlanningCenter.Api {
                     new KeyValuePair<string, string>("scope", scope)
                 });
 
-                return await GetToken(options.ApiUrl, content);
+                return await GetTokenAsync(options.ApiUrl, content);
             }
             catch (Exception e) {
                 throw new ApiAccessException("Error Refreshing Token", e);
             }
         }
 
-        private static async Task<PlanningCenterRestResponse<PlanningCenterToken>> GetToken(string url, FormUrlEncodedContent content) {
+        private static async Task<PlanningCenterRestResponse<PlanningCenterToken>> GetTokenAsync(string url, FormUrlEncodedContent content) {
             using (var httpClient = new HttpClient()) {
                 var response = await httpClient.PostAsync($"{url}/oauth/token", content);
                 var responseContent = await response.Content.ReadAsStringAsync();
