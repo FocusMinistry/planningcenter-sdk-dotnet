@@ -7,7 +7,7 @@ using System.Text;
 namespace PlanningCenter.Api.QueryObjects {
     public class BaseQO {
         public BaseQO() {
-            PageNumber = 0;
+            PageNumber = 1;
             PageSize = 25;
         }
 
@@ -28,14 +28,21 @@ namespace PlanningCenter.Api.QueryObjects {
             }
         }
 
-        [QO("page")]
         public int? PageNumber { get; set; }
 
-        /// <summary>
-        /// Fellowship One changed the query variable from recordsPerPage on the activities realm
-        /// </summary>
-        [QO("pageSize")]
+        [QO("per_page")]
         public int? PageSize { get; set; }
+
+        [QO("offset")]
+        public int? Offset {
+            get {
+                if (PageNumber.HasValue && PageSize.HasValue) {
+                    return (PageNumber - 1) * PageSize; 
+                }
+
+                return 0;
+            }
+        }
 
         internal string ToQueryString() { //non-encoded query string
             StringBuilder sb = new StringBuilder();
