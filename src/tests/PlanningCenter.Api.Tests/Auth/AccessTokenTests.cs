@@ -16,7 +16,7 @@ namespace PlanningCenter.Api.Tests.Auth {
 
         [Test]
         public async Task integration_refresh_access_token() {
-            var response = await PlanningCenterClient.RefreshAccessTokenAsync(Options, "e46de13f23bf21c2e8de16dc8866459060d6387960d242e3a818375e5c9b31d0");
+            var response = await PlanningCenterClient.RefreshAccessTokenAsync(Options, "e46de13f23bf21c2e8de16dc8866459060d6387960d242e3a818375e5c9b31d0", "people check_ins giving groups resources services");
             response.Data.ShouldNotBeNull();
         }
     }

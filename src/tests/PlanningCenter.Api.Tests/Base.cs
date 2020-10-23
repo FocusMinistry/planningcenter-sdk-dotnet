@@ -14,8 +14,8 @@ namespace PlanningCenter.Api.Tests {
             Options = new PlanningCenterOptions
             {
                 ApiUrl = "https://api.planningcenteronline.com",
-                ClientID = "bd8e6a7444956c44eeb137bcd767d334c43f379f02809dace78915b142a42944",
-                ClientSecret = "bf60ccd70dabb0bf6d30913d9588bc7421e1fbca6c9cd1f72a4feed5723ef3c0"
+                ClientID = "",
+                ClientSecret = ""
             };
         }
 

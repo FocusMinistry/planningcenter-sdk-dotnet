@@ -1,7 +1,7 @@
 ﻿using JsonApiSerializer.JsonApi;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PlanningCenter.Api.Models.Internal {
     internal class InternalHousehold : BaseModel {
@@ -16,7 +16,7 @@ namespace PlanningCenter.Api.Models.Internal {
             MemberCount = household.MemberCount;
             PrimaryContactID = household.PrimaryContactID;
             PrimaryContact = household.PrimaryContact;
-            People = household.People;
+            People = new Relationship<List<Lookup>> { Data = household.People.Data.Select(x => new Lookup { Type = x.Type, Id = x.Id }).ToList() };
         }
 
         public string Name { get; set; }

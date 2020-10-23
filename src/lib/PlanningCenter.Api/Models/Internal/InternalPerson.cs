@@ -27,10 +27,13 @@ namespace PlanningCenter.Api.Models.Internal {
             MiddleName = person.MiddleName;
             NickName = person.NickName;
             Status = person.Status;
-            Campus = person.Campus;
             RemoteID = person.RemoteID;
             PeoplePermissions = person.PeoplePermissions;
             SchoolType = person.SchoolType;
+
+            if (person.Campus != null) {
+                Campus = person.Campus;
+            }
         }
 
         [JsonProperty("anniversary")]
@@ -91,6 +94,6 @@ namespace PlanningCenter.Api.Models.Internal {
         public string Status { get; set; }
 
         [JsonProperty("primary_campus")]
-        public Relationship<Campus> Campus { get; set; }
+        public Relationship<Lookup> Campus { get; set; }
     }
 }

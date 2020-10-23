@@ -14,8 +14,8 @@ namespace PlanningCenter.Api.Tests.Sets {
         [OneTimeSetUp]
         public void OneTimeSetup() {
             PopulateClient(new PlanningCenterClient(Options, new Models.PlanningCenterToken {
-                access_token = "05f878e42b185843b3d8a9b5b6cf411ac83ce82c876a169c801d24ae975ed83c",
-                refresh_token = "31437de3c021571b82a43489cd1cfc5711b8f85e8386ee184440ed8867b09465"
+                access_token = "",
+                refresh_token = ""
             }));
         }
 

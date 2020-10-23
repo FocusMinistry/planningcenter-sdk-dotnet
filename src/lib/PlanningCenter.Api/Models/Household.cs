@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace PlanningCenter.Api.Models {
     public class Household : BaseModel {
         public Household() {
-            People = new Relationship<List<Lookup>>();
+            People = new Relationship<List<Person>>();
             Type = "Household";
         }
 
@@ -31,6 +31,6 @@ namespace PlanningCenter.Api.Models {
         public Relationship<Lookup> PrimaryContact { get; set; }
 
         [JsonProperty("people")]
-        public Relationship<List<Lookup>> People { get; set; }
+        public Relationship<List<Person>> People { get; set; }
     }
 }

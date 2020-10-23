@@ -94,7 +94,7 @@ namespace PlanningCenter.Api.Models {
 
         [JsonProperty("primary_campus")]
         [JsonIgnore]
-        public Relationship<Campus> Campus { get; set; }
+        public Relationship<Lookup> Campus { get; set; }
 
         [JsonProperty("emails")]
         public List<Email> Emails { get; set; }

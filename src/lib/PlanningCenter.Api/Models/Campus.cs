@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace PlanningCenter.Api.Models {
-    public class Campus {
+    public class Campus : BaseModel {
         [JsonProperty("latitude")]
         public decimal Latitude { get; set; }
 
