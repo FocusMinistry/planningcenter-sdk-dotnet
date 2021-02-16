@@ -9,6 +9,7 @@ namespace PlanningCenter.Api.Models {
             Emails = new List<Email>();
             PhoneNumbers = new List<PhoneNumber>();
             Addresses = new List<Address>();
+            Households = new List<IncludedHousehold>();
             Type = "Person";
         }
 
@@ -106,6 +107,6 @@ namespace PlanningCenter.Api.Models {
         public List<Address> Addresses { get; set; }
 
         [JsonProperty("households")]
-        public List<Household> Households { get; set; }
+        public List<IncludedHousehold> Households { get; set; }
     }
 }

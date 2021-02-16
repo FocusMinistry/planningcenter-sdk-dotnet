@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
 using PlanningCenter.Api.Extensions;
 
 namespace PlanningCenter.Api.Sets {
@@ -106,7 +107,9 @@ namespace PlanningCenter.Api.Sets {
                 planningCenterResponse.ErrorMessage = planningCenterResponse.JsonResponse;
             }
             else {
-                planningCenterResponse.Data = JsonConvert.DeserializeObject<S>(planningCenterResponse.JsonResponse, new JsonApiSerializerSettings());
+                planningCenterResponse.Data = JsonConvert.DeserializeObject<S>(planningCenterResponse.JsonResponse, new JsonApiSerializerSettings {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                });
             }
 
             return planningCenterResponse;

@@ -84,6 +84,7 @@
     <Compile Include="Models\FieldDefinition.cs" />
     <Compile Include="Giving\Models\Fund.cs" />
     <Compile Include="Models\Household.cs" />
+    <Compile Include="Models\Included\IncludedHousehold.cs" />
     <Compile Include="Models\Internal\InternalAddress.cs" />
     <Compile Include="Models\Internal\InternalEmail.cs" />
     <Compile Include="Models\Internal\InternalHousehold.cs" />
