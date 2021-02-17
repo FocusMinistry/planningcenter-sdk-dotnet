@@ -28,9 +28,11 @@ namespace PlanningCenter.Api.Models {
         public int PrimaryContactID { get; set; }
 
         [JsonProperty("primary_contact")]
+        [JsonIgnore]
         public Relationship<Lookup> PrimaryContact { get; set; }
 
         [JsonProperty("people")]
+        [JsonIgnore]
         public Relationship<List<Person>> People { get; set; }
     }
 }

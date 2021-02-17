@@ -107,9 +107,15 @@ namespace PlanningCenter.Api.Sets {
                 planningCenterResponse.ErrorMessage = planningCenterResponse.JsonResponse;
             }
             else {
-                planningCenterResponse.Data = JsonConvert.DeserializeObject<S>(planningCenterResponse.JsonResponse, new JsonApiSerializerSettings {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                });
+                try {
+                    planningCenterResponse.Data = JsonConvert.DeserializeObject<S>(planningCenterResponse.JsonResponse, new JsonApiSerializerSettings {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                    });
+                }
+                catch (Exception e) {
+                    var t = e.Message;
+                    throw;
+                }
             }
 
             return planningCenterResponse;
